@@ -23,7 +23,7 @@ from sklearn.svm import SVC
 print('START\n')
 
 
-def machineLearing1():
+def machineLearing():
     url = 'https://raw.githubusercontent.com/jbrownlee/Datasets/master/iris.csv'
     names = ['sepal-length', 'sepal-width',
              'petal-length', 'petal-width', 'class']
@@ -39,7 +39,7 @@ def machineLearing1():
     plt.show()
 
 
-machineLearing1()
+machineLearing()
 
 
 print('\nSTOP')
