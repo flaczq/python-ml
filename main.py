@@ -1,45 +1,41 @@
-import sys
-import scipy
-import numpy
-import matplotlib
-import pandas
-import sklearn
+from sklearn import tree
+from sklearn.datasets import load_iris
+import numpy as np
 
-# Load libraries
-import pandas
-from pandas.plotting import scatter_matrix
-import matplotlib.pyplot as plt
-from sklearn import model_selection
-from sklearn.metrics import classification_report
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import accuracy_score
-from sklearn.linear_model import LogisticRegression
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-from sklearn.naive_bayes import GaussianNB
-from sklearn.svm import SVC
-
-print('START\n')
+print('----- START -----\n')
 
 
-def machineLearing():
-    url = 'https://raw.githubusercontent.com/jbrownlee/Datasets/master/iris.csv'
-    names = ['sepal-length', 'sepal-width',
-             'petal-length', 'petal-width', 'class']
-    dataset = pandas.read_csv(url, names=names)
-
-    print(dataset.shape)
-    print(dataset.head(20))
-    print(dataset.describe())
-    print(dataset.groupby('class').size())
-
-    dataset.plot(kind='box', subplots=True, layout=(
-        2, 2), sharex=False, sharey=False)
-    plt.show()
+def machineLearingGoogle():
+    # 0 - bumpy / apple
+    # 1 - smooth / orange
+    features = [[140, 1], [130, 1], [150, 0], [170, 0]]
+    labels = [0, 0, 1, 1]
+    clf = tree.DecisionTreeClassifier()
+    clf = clf.fit(features, labels)
+    print('apple' if clf.predict([[170, 0]]) == 0 else 'orange')
 
 
-machineLearing()
+def mlIris():
+    # 0 - setosa
+    # 1 - versicolor
+    # 2 - virginica
+    iris = load_iris()
+    test_idx = [0, 50, 100]
+
+    train_target = np.delete(iris.target, test_idx)
+    train_data = np.delete(iris.data, test_idx, axis=0)
+
+    test_target = iris.target[test_idx]
+    test_data = iris.data[test_idx]
+
+    clf = tree.DecisionTreeClassifier()
+    clf = clf.fit(train_data, train_target)
+
+    print(test_target)
+    print(clf.predict(test_data))
 
 
-print('\nSTOP')
+# machineLearingGoogle()
+mlIris()
+
+print('\n----- STOOP -----')
